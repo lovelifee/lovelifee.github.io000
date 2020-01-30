@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>JS</title>
+    <meta name="description" content="#">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <script src="HashStorage.js"></script>
+    <script>
+        var drinkStorage = new HashStorage();
+    </script>
+
+    <input type="button" onclick="addDrink()" value="Add Drink" /><br><br>
+    <input type="button" onclick="getDrink()" value="Get Drink" /><br><br>
+    <input type="button" onclick="delDrink()" value="Del Drink" /><br><br>
+    <input type="button" onclick="allDrink()" value="All Drinks" />
+
+    <script>
+        function addDrink() {
+            var drinkName = prompt('Drink name');
+            var drinkIsAlco = confirm('Alco?');
+            var drinkPrice = prompt('Price?');
+            var drinkInfo = prompt('Info');
+            var info = {
+                'isAlco': drinkIsAlco,
+                'info': drinkInfo
+            };
+            drinkStorage.addValue(drinkName, info);
+        }
+
+        function getDrink() {
+            var drinkName = prompt('Drink name');
+            var info = drinkStorage.getValue(drinkName);
+            if (info) {
+                alert('Name: ' + drinkName +
+                    '\nInfo: ' + (info.isAlco ? 'alco' : 'not alco') +
+                    '\nRecipe: ' +
+                    '\n' + info.info);
+            } else {
+                alert('no such drink in storage');
+            }
+        }
+
+        function delDrink() {
+            var drinkName = prompt('What drink to remove?');
+            var del = drinkStorage.deleteValue(drinkName);
+            if (del){
+                delete drinkStorage.addValue(drinkName);
+            } else {
+                alert('no such drink in storage');
+            }
+        }
+        
+        function allDrink() {
+            var all = drinkStorage.getKeys(drinkName);
+            var keys = Object.keys(drinkName);
+            console.log(keys);
+        }
+    </script>
+</body>
+
+</html>
+
+
+
